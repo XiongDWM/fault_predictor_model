@@ -2,10 +2,10 @@ package com.xiongdwm.faultpredictor;
 
 import weka.core.Instance;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-public class SecureFeatureData {
+public class SecureFeatureData implements Serializable {
     private List<Double> features;
     private String faultType; // 用于训练时的标签
     private String timestamp;
@@ -31,7 +31,6 @@ public class SecureFeatureData {
     public String getTimestamp() { return timestamp; }
     public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
     
-    // 转换为Weka Instance
     public Instance toInstance(FaultTypePredictor predictor) {
         double[] values = new double[features.size() + 1]; // +1 for class attribute
         for (int i = 0; i < features.size(); i++) {

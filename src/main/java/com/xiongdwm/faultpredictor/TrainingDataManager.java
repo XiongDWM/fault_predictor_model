@@ -14,7 +14,6 @@ import java.util.zip.GZIPOutputStream;
 public class TrainingDataManager {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     
-    // 保存训练数据为自定义格式
     public static void saveTrainingData(List<SecureFeatureData> data, String filePath) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(filePath);
              GZIPOutputStream gzos = new GZIPOutputStream(fos);
@@ -28,12 +27,11 @@ public class TrainingDataManager {
         }
     }
     
-    // 从自定义格式加载训练数据
     public static List<SecureFeatureData> loadTrainingData(String filePath) throws IOException {
         List<SecureFeatureData> data = new ArrayList<>();
         
         if (!Files.exists(Paths.get(filePath))) {
-            return data; // 文件不存在，返回空列表
+            return data; 
         }
         
         try (FileInputStream fis = new FileInputStream(filePath);
