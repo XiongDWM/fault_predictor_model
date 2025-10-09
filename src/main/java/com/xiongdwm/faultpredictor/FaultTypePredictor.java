@@ -10,7 +10,6 @@ public class FaultTypePredictor {
     private HoeffdingTree model;
     private Instances header;
     
-    // 故障类型列表
     private static final List<String> FAULT_TYPES = Arrays.asList(
         "压坏", "动物啃食", "电腐蚀", "外力破坏", "劣化", "运行缺陷"
     );
@@ -20,28 +19,28 @@ public class FaultTypePredictor {
     }
 
     private void initializeModel() {
-        // 定义属性 (11个特征 + 1个类别)
+    
         ArrayList<Attribute> attrs = new ArrayList<>();
         
-        // 空间特征 (3)
+    
         attrs.add(new Attribute("grid_id"));
         attrs.add(new Attribute("longitude_norm"));
         attrs.add(new Attribute("latitude_norm"));
         
-        // 时间特征 (4)
+
         attrs.add(new Attribute("month"));
         attrs.add(new Attribute("hour"));
         attrs.add(new Attribute("season"));
         attrs.add(new Attribute("is_weekend"));
         
-        // 光缆属性 (4)
+
         attrs.add(new Attribute("cable_level"));
         attrs.add(new Attribute("length_norm"));
         attrs.add(new Attribute("service_type"));
         attrs.add(new Attribute("owner"));
         attrs.add(new Attribute("loss_norm"));
         
-        // 类别标签
+
         ArrayList<String> classes = new ArrayList<>(FAULT_TYPES);
         attrs.add(new Attribute("fault_type", classes));
         
