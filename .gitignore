@@ -6,6 +6,7 @@
 /.nb-gradle/
 ### VS Code ###
 .vscode/
+bin/
 
 .DS_Store
 src/main/.DS_Store
