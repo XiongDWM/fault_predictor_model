@@ -1,4 +1,5 @@
-package com.xiongdwm.faultpredictor;
+package com.xiongdwm.faultpredictor.model;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class FaultPredictorConfig {
     
     @Bean
-    public FaultTypePredictor faultTypePredictor() {
-        return new FaultTypePredictor();
+    public FaultTypePredictorHoeffding faultTypePredictor() {
+        return new FaultTypePredictorHoeffding();
     }
 }

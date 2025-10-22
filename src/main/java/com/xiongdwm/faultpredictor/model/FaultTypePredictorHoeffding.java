@@ -1,4 +1,4 @@
-package com.xiongdwm.faultpredictor;
+package com.xiongdwm.faultpredictor.model;
 
 import weka.classifiers.trees.HoeffdingTree;
 import weka.core.*;
@@ -6,15 +6,15 @@ import weka.core.SerializationHelper;
 
 import java.util.*;
 
-public class FaultTypePredictor {
+public class FaultTypePredictorHoeffding {
     private HoeffdingTree model;
     private Instances header;
     
     private static final List<String> FAULT_TYPES = Arrays.asList(
-        "压坏", "动物啃食", "电腐蚀", "外力破坏", "劣化", "运行缺陷"
+        "压坏", "动物啃食", "电腐蚀", "外力破坏", "纤芯劣化", "运行缺陷"
     );
 
-    public FaultTypePredictor() {
+    public FaultTypePredictorHoeffding() {
         initializeModel();
     }
 
@@ -26,19 +26,18 @@ public class FaultTypePredictor {
         attrs.add(new Attribute("grid_id"));
         attrs.add(new Attribute("longitude_norm"));
         attrs.add(new Attribute("latitude_norm"));
-        
-
-        attrs.add(new Attribute("month"));
-        attrs.add(new Attribute("hour"));
-        attrs.add(new Attribute("season"));
-        attrs.add(new Attribute("is_weekend"));
-        
+                
 
         attrs.add(new Attribute("cable_level"));
         attrs.add(new Attribute("length_norm"));
         attrs.add(new Attribute("service_type"));
         attrs.add(new Attribute("owner"));
         attrs.add(new Attribute("loss_norm"));
+
+        attrs.add(new Attribute("month"));
+        attrs.add(new Attribute("hour"));
+        attrs.add(new Attribute("season"));
+        attrs.add(new Attribute("is_weekend"));
         
 
         ArrayList<String> classes = new ArrayList<>(FAULT_TYPES);

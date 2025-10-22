@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.xiongdwm'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.1'
 
 java {
 	toolchain {
@@ -25,6 +25,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'nz.ac.waikato.cms.weka:weka-stable:3.8.6'
+	implementation 'org.deeplearning4j:deeplearning4j-core:1.0.0-M2.1'
+	implementation 'org.nd4j:nd4j-native-platform:1.0.0-M2.1'
+
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -33,4 +36,31 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task sdkJar(type: Jar) {
+    group = 'build'
+    description = 'Assemble a JAR containing only the sdk package and pojo.TrainingDataPackage'
+    archiveBaseName.set("data-package-sdk")
+    archiveClassifier.set('sdk') 
+
+    from(sourceSets.main.output) {
+        include 'com/xiongdwm/faultpredictor/sdk/**'
+        include 'com/xiongdwm/faultpredictor/pojo/TrainingDataPackage*'
+    }
+
+	// include project root README and LICENSE into the jar root
+	from(rootDir) {
+		include 'README-SDK.md'
+		include 'LICENSE'
+		// place these files at the root of the generated jar
+		into ''
+	}
+
+    manifest {
+        attributes(
+            'Implementation-Title': "data-package-sdk-sdk",
+            'Implementation-Version': project.version ?: 'unspecified'
+        )
+    }
 }

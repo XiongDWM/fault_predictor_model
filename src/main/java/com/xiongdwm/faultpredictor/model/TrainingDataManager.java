@@ -1,6 +1,8 @@
-package com.xiongdwm.faultpredictor;
+package com.xiongdwm.faultpredictor.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xiongdwm.faultpredictor.pojo.SecureFeatureData;
+
 import weka.core.Instance;
 
 import java.io.*;
@@ -50,8 +52,8 @@ public class TrainingDataManager {
     }
     
     // 从安全特征数据创建Weka实例
-    public static Instance createInstance(SecureFeatureData secureData, FaultTypePredictor predictor) {
-        double[] values = new double[secureData.getFeatures().size() + 1]; // +1 for class attribute
+    public static Instance createInstance(SecureFeatureData secureData, FaultTypePredictorHoeffding predictor) {
+        double[] values = new double[secureData.getFeatures().size()+4+1]; // +1 for class attribute and +4 for time features
         for (int i = 0; i < secureData.getFeatures().size(); i++) {
             values[i] = secureData.getFeatures().get(i);
         }
@@ -59,7 +61,8 @@ public class TrainingDataManager {
         Instance instance = new weka.core.DenseInstance(1.0, values);
         instance.setDataset(predictor.getHeader());
         
-        // 如果有标签，则设置类别值
+
+
         if (secureData.getFaultType() != null && !secureData.getFaultType().isEmpty()) {
             instance.setClassValue(secureData.getFaultType());
         }

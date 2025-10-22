@@ -8,6 +8,7 @@ public class FaultPredictorApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FaultPredictorApplication.class, args);
+        System.out.println("=============================started==============================>>>");
     }
 
 }
