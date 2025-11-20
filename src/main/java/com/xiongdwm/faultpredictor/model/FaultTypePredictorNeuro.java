@@ -12,7 +12,6 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.dataset.DataSet;
 
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class FaultTypePredictorNeuro {
     private MultiLayerNetwork model;
